@@ -133,7 +133,7 @@ export default function HomePage() {
       GitHub
     </a>
     <a
-      href="https://linkedin.com/in/lucas-hardeman"
+      href="www.linkedin.com/in/lucas-hardeman-824741328"
       target="_blank"
       rel="noopener noreferrer"
       className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition"
