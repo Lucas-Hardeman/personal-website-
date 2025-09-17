@@ -42,7 +42,7 @@ const SECTIONS: Section[] = [
         logoSrc: "/fsu-logo.png",
         alt: "FSU EOAS Logo",
         name: "Research Intern — ArcNLET Development",
-        description: "FSU EOAS · Sep 2024 – Present",
+        description: "FSU EOAS · Sep 2024 – May 2025",
       },
     ],
   },
