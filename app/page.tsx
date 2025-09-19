@@ -1,10 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import Link from "next/link";
+import { QRCodeCanvas } from "qrcode.react";
+import { useState } from "react";
 
 export default function HomePage() {
+  const [showQR, setShowQR] = useState(false);
   return (
     <main className="min-h-screen bg-black text-gray-200 px-6 md:px-10 lg:px-16 py-12 md:py-20 flex flex-col">
       {/* Hero Section */}
@@ -84,70 +87,112 @@ export default function HomePage() {
         </p>
       </motion.section>
       {/* Featured Projects Section */}
-<section className="max-w-5xl mx-auto text-center mt-20">
-  <h2 className="text-3xl font-bold mb-10">Featured Projects</h2>
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-    
-    {/* ArcNLET Project */}
-    <div className="bg-gray-900 rounded-xl shadow-lg p-6 text-left">
-      <h3 className="text-xl font-semibold mb-3">ArcNLET Python</h3>
-      <p className="text-gray-400 mb-4">
-        GIS-based pollutant transport modeling tool rewritten in Python for 
-        better performance and ArcGIS Pro integration.
-      </p>
-      <a
-        href="https://github.com/ArcNLET-Py/ArcNLET-Py/blob/main/ArcNLET-Py-Source-Code/tool4_transport.py"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-400 hover:text-blue-500 font-medium"
-      >
-        View on GitHub →
-      </a>
-    </div>
+      <section className="max-w-5xl mx-auto text-center mt-20">
+        <h2 className="text-3xl font-bold mb-10">Featured Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* ArcNLET Project */}
+          <div className="bg-gray-900 rounded-xl shadow-lg p-6 text-left">
+            <h3 className="text-xl font-semibold mb-3">ArcNLET Python</h3>
+            <p className="text-gray-400 mb-4">
+              GIS-based pollutant transport modeling tool rewritten in Python
+              for better performance and ArcGIS Pro integration.
+            </p>
+            <a
+              href="https://github.com/ArcNLET-Py/ArcNLET-Py/blob/main/ArcNLET-Py-Source-Code/tool4_transport.py"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-500 font-medium"
+            >
+              View on GitHub →
+            </a>
+          </div>
 
-    {/* Climate Analyzer Project */}
-    <div className="bg-gray-900 rounded-xl shadow-lg p-6 text-left">
-      <h3 className="text-xl font-semibold mb-3">Climate Analyzer</h3>
-      <p className="text-gray-400 mb-4">
-        Web app for analyzing climate data trends using custom Python models 
-        for temperature & humidity prediction.
-      </p>
-      <a
-        href="https://github.com/mhartle02/ClimateAnalyzerProject"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="text-blue-400 hover:text-blue-500 font-medium"
-      >
-        View on GitHub →
-      </a>
-    </div>
-  </div>
-  <footer className="mt-20 text-center">
-  <div className="flex flex-wrap justify-center gap-4 mb-12">
-    <a
-      href="https://github.com/Lucas-Hardeman"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition"
-    >
-      GitHub
-    </a>
-    <a
-  href="https://www.linkedin.com/in/lucas-hardeman-824741328/"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
->
-  LinkedIn
-</a>
-  </div>
-</footer>
+          {/* Climate Analyzer Project */}
+          <div className="bg-gray-900 rounded-xl shadow-lg p-6 text-left">
+            <h3 className="text-xl font-semibold mb-3">Climate Analyzer</h3>
+            <p className="text-gray-400 mb-4">
+              Web app for analyzing climate data trends using custom Python
+              models for temperature & humidity prediction.
+            </p>
+            <a
+              href="https://github.com/mhartle02/ClimateAnalyzerProject"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:text-blue-500 font-medium"
+            >
+              View on GitHub →
+            </a>
+          </div>
+        </div>
+      </section>
 
-</section>
+      {/* Footer */}
+      <footer className="mt-20 text-center">
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {/* GitHub */}
+          <a
+            href="https://github.com/Lucas-Hardeman"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition"
+          >
+            GitHub
+          </a>
 
+          {/* LinkedIn */}
+          <a
+            href="https://www.linkedin.com/in/lucas-hardeman-824741328/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition"
+          >
+            LinkedIn
+          </a>
+
+          <button
+            onClick={() => setShowQR(true)}
+            className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg transition"
+          >
+            QR Code
+          </button>
+        </div>
+      </footer>
+
+      {/* QR Code Modal with animation */}
+      <AnimatePresence>
+        {showQR && (
+          <motion.div
+            key="backdrop"
+            className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              key="modal"
+              className="bg-white p-6 rounded-lg shadow-lg text-center"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <h2 className="text-lg font-semibold mb-4 text-black">
+                Scan to visit my site
+              </h2>
+              <QRCodeCanvas value="https://lucashardeman.dev" size={200} />
+              <div className="mt-4">
+                <button
+                  onClick={() => setShowQR(false)}
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
-
-  
   );
-
 }
