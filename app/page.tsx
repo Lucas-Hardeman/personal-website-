@@ -47,7 +47,9 @@ export default function HomePage() {
 
           <div className="flex justify-center mt-8">
   <Link
-    href="/resume"
+    href="https://docsend.com/v/xvpn5/lucashardemanresume"
+                  target="_blank"
+                  rel="noopener noreferrer"
     className="w-full max-w-xl bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-semibold text-lg py-4 transition text-center"
   >
     View My Resume
